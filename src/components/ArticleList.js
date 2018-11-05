@@ -1,33 +1,25 @@
 import React, {Component} from 'react'
+import accordeonOpen from '../decorators/accordeonOpen'
 import Article from './Article'
 
-export default class ArticleList extends Component {
-  state = {
-    openArticleId: null
-  }
-
-  render() {
-    const articleElements = this.props.articles.map((article) => {
-      return (
-        <li key = {article.id}>
-          <Article
-            article = {article}
-            isOpen = {article.id === this.state.openArticleId}
-            toggleOpen = {this.toggleOpenArticle.bind(this, article.id)}
-          />
-        </li>
-      )
-    })
-
+function ArticleList({articles = [], openItemId, toggleOpen}) {
+  const articleElements = articles.map((article) => {
     return (
-      <ul>
-        {articleElements}
-      </ul>
+      <li key = {article.id}>
+        <Article
+          article = {article}
+          isOpen = {article.id === openItemId}
+          toggleOpen = {toggleOpen.bind(this, article.id)}
+        />
+      </li>
     )
-  }
+  })
 
-  toggleOpenArticle(openArticleId) {
-    if (this.state.openArticleId === openArticleId) openArticleId = null
-    this.setState({openArticleId})
-  }
+  return (
+    <ul>
+      {articleElements}
+    </ul>
+  )
 }
+
+export default accordeonOpen(ArticleList)

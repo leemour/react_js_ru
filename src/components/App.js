@@ -12,8 +12,11 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <UserForm />
-        <ArticleList articles = {this.props.articles} />
+        <UserForm articles = {this.props.articles} />
+        <ArticleList
+          articles = {this.props.articles}
+          defaultOpenId = {this.props.articles[0].id}
+        />
         <ArticlesChart articles = {this.props.articles} />
       </div>
     )

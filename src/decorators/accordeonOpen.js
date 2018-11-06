@@ -1,11 +1,11 @@
 import React, {Component as ReactComponent} from 'react'
 
-export default (OriginalComponent) => class WrappedComponent extends ReactComponent {
+export default Component => class Accordion extends ReactComponent {
   state = {
     openItemId: null
   }
   render() {
-    return <OriginalComponent {...this.props} {...this.state}
+    return <Component {...this.props} {...this.state}
       toggleOpen = {this.toggleOpen} />
   }
   toggleOpen = (openItemId) => {

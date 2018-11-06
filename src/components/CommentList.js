@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import toggleOpen from '../decorators/toggleOpen'
 import Comment from './Comment'
 
@@ -10,6 +11,15 @@ function CommentList({comments = [], isOpen, toggleOpen}) {
       {displayComments(comments, isOpen)}
     </ul>
   )
+}
+
+CommentList.propTypes = {
+  comments: PropTypes.arrayOf(PropTypes.shape({
+    text: PropTypes.string,
+    user: PropTypes.string.isRequired
+  })).isRequired,
+  isOpen: PropTypes.bool,
+  toggleOpen: PropTypes.func.isRequired,
 }
 
 function displayComments(comments, isOpen) {

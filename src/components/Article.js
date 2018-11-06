@@ -1,15 +1,21 @@
-import React, {Component} from 'react'
+import React, {PureComponent} from 'react'
 import PropTypes from 'prop-types'
 import toggleOpen from '../decorators/toggleOpen'
 import CommentList from './CommentList'
 
-export default class Article extends Component {
+export default class Article extends PureComponent {
   static propTypes = {
     article: PropTypes.shape({
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       text: PropTypes.string,
-    }).isRequired
+    }).isRequired,
+    isOpen: PropTypes.bool,
+    toggleOpen: PropTypes.func.isRequired
+  }
+
+  state = {
+    updateIndex: 0
   }
 
   render() {
@@ -24,6 +30,11 @@ export default class Article extends Component {
       </div>
     )
   }
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return this.props.isOpen !== nextProps.isOpen
+  // }
+
   setContainerRef = ref => {
     this.container = ref
     // console.log('----', ref)
@@ -34,6 +45,9 @@ export default class Article extends Component {
     return (
       <section>
         {article.text}
+        <button onClick = {this.updateIndex}>
+          Update
+        </button>
         <CommentList comments = {article.comments} ref = {this.setCommentListRef}/>
       </section>
     )
@@ -42,15 +56,19 @@ export default class Article extends Component {
     ref
     // console.log('----', ref)
   }
+  updateIndex = () => {
+    this.setState({updateIndex: this.state.updateIndex + 1})
+  }
 
   // getDerivedStateFromProps = () => {
   //   console.log('---------', 'receiving props')
   // }
-  // componentDidMount = () => {
-  //   console.log('-----', 'mounted')
-  // }
-  // componentDidUpdate = () => {
-  // }
+  componentDidMount = () => {
+    console.log('-----', `mounted ${this.props.article.id}`)
+  }
+  componentDidUpdate = () => {
+    console.log('-----', `updated ${this.props.article.id}`)
+  }
 
   // // Deprecated now
   // componentWillReceiveProps(nextProps) {

@@ -1,0 +1,20 @@
+.comment-form {
+  padding: 10px;
+}
+
+.comment-form__input {
+  width: 400px;
+  max-width: 100%;
+  margin: 5px 0;
+  padding: 6px 10px;
+  display: block;
+  border: 1px solid #ddd;
+}
+
+.comment-form__input:focus {
+  border-color: #3ce;
+}
+
+.comment-form__input--invalid {
+  border-color: red;
+}

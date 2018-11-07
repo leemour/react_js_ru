@@ -1,9 +1,9 @@
 import React, {PureComponent} from 'react'
 import PropTypes from 'prop-types'
-import toggleOpen from '../decorators/toggleOpen'
-import CommentList from './CommentList'
+import toggleOpen from '../../decorators/toggleOpen'
+import CommentList from '../CommentList'
 import {CSSTransitionGroup} from 'react-transition-group'
-import './article.css'
+import './style.css'
 
 export default class Article extends PureComponent {
   static propTypes = {
@@ -71,12 +71,13 @@ export default class Article extends PureComponent {
     this.setState({updateIndex: this.state.updateIndex + 1})
   }
 
+  // Good callbacks
   // getDerivedStateFromProps = () => {
   //   console.log('---------', 'receiving props')
   // }
-  componentDidMount = () => {
-    console.log('-----', `mounted ${this.props.article.id}`)
-  }
+  // componentDidMount = () => {
+  //   console.log('-----', `mounted ${this.props.article.id}`)
+  // }
   componentDidUpdate = () => {
     console.log('-----', `updated ${this.props.article.id}`)
   }

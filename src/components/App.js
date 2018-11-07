@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import ArticleList from './ArticleList'
 import ArticlesChart from './ArticlesChart'
-import UserForm from './UserForm'
+import Filters from './Filters'
+import Counter from './Counter'
 
 export default class App extends Component {
   static propTypes = {
@@ -12,7 +13,8 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <UserForm articles = {this.props.articles} />
+        <Counter />
+        <Filters articles = {this.props.articles} />
         <ArticleList
           articles = {this.props.articles}
           defaultOpenId = {this.props.articles[0].id}

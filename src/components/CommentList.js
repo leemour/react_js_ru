@@ -16,10 +16,7 @@ function CommentList({comments = [], isOpen, toggleOpen}) {
 }
 
 CommentList.propTypes = {
-  comments: PropTypes.arrayOf(PropTypes.shape({
-    text: PropTypes.string,
-    user: PropTypes.string.isRequired
-  })).isRequired,
+  comments: PropTypes.arrayOf(PropTypes.string).isRequired,
   isOpen: PropTypes.bool,
   toggleOpen: PropTypes.func.isRequired,
 }
@@ -30,8 +27,8 @@ function displayComments(comments, isOpen) {
 
   return (
     <ul>
-      {comments.map((comment) => {
-        return <li key = {comment.id}><Comment comment = {comment}/></li>
+      {comments.map((id) => {
+        return <li key = {id}><Comment id = {id}/></li>
       })}
     </ul>
   )

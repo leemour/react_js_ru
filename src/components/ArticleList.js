@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import accordeonOpen from '../decorators/accordeonOpen'
 import Article from './Article'
 import {connect} from 'react-redux'
+import {filteredArticlesSelector} from '../selectors'
 
 function ArticleList({articles = [], openItemId, toggleOpen}) {
   const articleElements = articles.map((article) => {
@@ -36,6 +37,6 @@ ArticleList.propTypes = {
   toggleOpen: PropTypes.func.isRequired,
 }
 
-export default connect((state) => ({
-  articles: state.articles
-}))(accordeonOpen(ArticleList))
+export default connect(
+  (state) => ({ articles: filteredArticlesSelector(state) })
+)(accordeonOpen(ArticleList))

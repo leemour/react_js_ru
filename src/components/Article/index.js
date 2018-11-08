@@ -5,7 +5,7 @@ import toggleOpen from '../../decorators/toggleOpen'
 import CommentList from '../CommentList'
 import {CSSTransitionGroup} from 'react-transition-group'
 import './style.css'
-import {deleteArticle} from '../../AC'
+import {deleteArticle} from '../../actions'
 
 class Article extends PureComponent {
   static propTypes = {

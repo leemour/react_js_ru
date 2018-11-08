@@ -1,11 +1,13 @@
 import React, {PureComponent} from 'react'
 import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
 import toggleOpen from '../../decorators/toggleOpen'
 import CommentList from '../CommentList'
 import {CSSTransitionGroup} from 'react-transition-group'
 import './style.css'
+import {deleteArticle} from '../../AC'
 
-export default class Article extends PureComponent {
+class Article extends PureComponent {
   static propTypes = {
     article: PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -28,6 +30,9 @@ export default class Article extends PureComponent {
         <button onClick = {toggleOpen}>
           {isOpen ? 'close' : 'open'}
         </button>
+        <button onClick = {this.handleDelete}>
+          Delete me
+        </button>
         <CSSTransitionGroup
           transitionName = 'article'
           transitionAppear
@@ -45,6 +50,12 @@ export default class Article extends PureComponent {
   // shouldComponentUpdate(nextProps, nextState) {
   //   return this.props.isOpen !== nextProps.isOpen
   // }
+
+  handleDelete = () => {
+    const {deleteArticle, article} = this.props
+    deleteArticle(article.id)
+    console.log('---', 'deleting article')
+  }
 
   setContainerRef = ref => {
     this.container = ref
@@ -92,3 +103,5 @@ export default class Article extends PureComponent {
 }
 
 // export default toggleOpen(Article)
+
+export default connect(null, { deleteArticle })(Article)

@@ -70,7 +70,11 @@ class Article extends PureComponent {
         <button onClick = {this.updateIndex}>
           Update
         </button>
-        <CommentList comments = {article.comments} ref = {this.setCommentListRef}/>
+        <CommentList
+          ref = {this.setCommentListRef}
+          comments = {article.comments}
+          articleId = {article.id}
+        />
       </section>
     )
   }

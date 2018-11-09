@@ -5,6 +5,7 @@ function uuidv4() {
 }
 
 export default store => next => action => {
-  action.payload.id = uuidv4()
-  next(action)
+  if (!action.generateId) return next(action)
+  const payload = { ...action.payload, id: uuidv4() }
+  next({ ...action, payload })
 }

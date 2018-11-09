@@ -1,9 +1,13 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
+import {addComment} from '../../actions'
 import './style.css'
 
-export default class CommentForm extends Component {
-  static propTypes = {}
+class CommentForm extends Component {
+  static propTypes = {
+    articleId: PropTypes.string.isRequired,
+  }
 
   state = {
     text: '',
@@ -22,20 +26,21 @@ export default class CommentForm extends Component {
 
   render() {
     return (
-      <form className = "comment-form" onSubmit = {this.handleFormSubmit} >
-        <input type="text"
-          className = {this.getClassName('user')}
-          value = {this.state.user}
-          onChange = {this.handleInputChange('user')}
-        />
-        <textarea
-          className = {this.getClassName('text')}
-          value = {this.state.text}
-          onChange = {this.handleInputChange('text')}
-        />
-        <input type = "submit"
-          value = "Комментировать"
-        />
+      <form className = "comment-form"
+        onSubmit = {this.handleFormSubmit} >
+          <input type="text"
+            className = {this.getClassName('user')}
+            value = {this.state.user}
+            onChange = {this.handleInputChange('user')}
+          />
+          <textarea
+            className = {this.getClassName('text')}
+            value = {this.state.text}
+            onChange = {this.handleInputChange('text')}
+          />
+          <input type = "submit"
+            value = "Comment"
+          />
       </form>
     )
   }
@@ -59,9 +64,12 @@ export default class CommentForm extends Component {
   }
   handleFormSubmit = (ev) => {
     ev.preventDefault()
-    this.setState({
-      user: '',
-      text: ''
-    })
+    const comment = {
+      user: this.state.user,
+      text: this.state.text
+    }
+    this.props.addComment(this.props.articleId, comment)
   }
 }
+
+export default connect(null, {addComment})(CommentForm)

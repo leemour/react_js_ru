@@ -23,14 +23,12 @@ export const filteredArticlesSelector = createSelector(
     // }
     // console.log('before', selectedArticles)
 
-    return Object.keys(articles).reduce((acc, key) => {
-      const article = articles[key]
-      if (selected.length && !selected.includes(article.id)) return acc
+    return articles.filter(article => {
+      if (selected.length && !selected.includes(article.id)) return false
       const published = Date.parse(article.date)
-      if ((from && published < from) || (to && published > to)) return acc
-      acc[key] = article
-      return acc
-    }, {})
+      if ((from && published < from) || (to && published > to)) return false
+      return true
+    })
   }
 )
 

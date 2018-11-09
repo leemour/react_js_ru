@@ -21,7 +21,7 @@ class ArticleList extends Component {
 
   render() {
     const {articles, openItemId, toggleOpen} = this.props
-    const articleElements = Object.values(articles).map(article => {
+    const articleElements = articles.toArray().map(article => {
       return (
         <li key = {article.id}>
           <Article

@@ -18,7 +18,7 @@ class Filters extends Component {
   }
   render() {
     const { articles, selected } = this.props
-    const options = Object.values(articles).map((article) => ({
+    const options = articles.toArray().map((article) => ({
       label: article.title,
       value: article.id
     }))

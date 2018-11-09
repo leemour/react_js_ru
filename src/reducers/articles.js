@@ -1,11 +1,9 @@
-import {DELETE_ARTICLE, ADD_COMMENT} from '../constants'
+import {DELETE_ARTICLE, ADD_COMMENT, LOAD_ARTICLES} from '../constants'
 import {normalizedArticles as defaultArticles} from '../fixtures'
 import {arrToMap} from '../helpers'
 
-const articlesMap = arrToMap(defaultArticles)
-
-export default (articles = articlesMap, action) => {
-  const {type, payload} = action
+export default (articles = {}, action) => {
+  const {type, payload, response} = action
 
   switch (type) {
     case DELETE_ARTICLE:
@@ -16,6 +14,8 @@ export default (articles = articlesMap, action) => {
       const updatedArticle = {...articles[payload.articleId], comments }
       // return Object.assign({}, articles, {[payload.articleId]: updatedArticle})
       return {...articles, [payload.articleId]: updatedArticle }
+    case LOAD_ARTICLES:
+      return arrToMap(response)
     default:
       return articles
   }

@@ -1,4 +1,5 @@
 export const DELETE_ARTICLE     = 'DELETE_ARTICLE'
+export const LOAD_ARTICLES      = 'LOAD_ARTICLES'
 export const INCREMENT          = 'INCREMENT'
 export const CHANGE_DATE_RANGE  = 'CHANGE_DATE_RANGE'
 export const CHANGE_SELECTED    = 'CHANGE_SELECTED'

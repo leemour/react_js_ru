@@ -1,5 +1,6 @@
 import {
   DELETE_ARTICLE,
+  LOAD_ARTICLES,
   INCREMENT,
   CHANGE_DATE_RANGE,
   CHANGE_SELECTED,
@@ -38,5 +39,12 @@ export function addComment(articleId, comment) {
     type: ADD_COMMENT,
     generateId: true,
     payload: { articleId, comment }
+  }
+}
+
+export function loadArticles() {
+  return {
+    type: LOAD_ARTICLES,
+    callAPI: '/api/article'
   }
 }

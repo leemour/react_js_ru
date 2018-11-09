@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 import {filteredArticlesSelector} from '../selectors'
 
 function ArticleList({articles = [], openItemId, toggleOpen}) {
-  const articleElements = articles.map((article) => {
+  const articleElements = Object.values(articles).map(article => {
     return (
       <li key = {article.id}>
         <Article
@@ -27,11 +27,7 @@ function ArticleList({articles = [], openItemId, toggleOpen}) {
 
 ArticleList.propTypes = {
   // from connect
-  articles: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    text: PropTypes.string,
-  })).isRequired,
+  articles: PropTypes.object.isRequired,
   // from accordeon
   openItemId: PropTypes.string,
   toggleOpen: PropTypes.func.isRequired,

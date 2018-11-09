@@ -1,16 +1,11 @@
-import {createStore} from 'redux'
+import {createStore, applyMiddleware} from 'redux'
 import reducer from '../reducers'
 import articles from '../fixtures'
+import logger from '../middlewares/logger'
 
+const enhancer = applyMiddleware(logger)
 
-const defaultFilter = {
-  selectedArticle: null,
-  selectedDays: {
-    from: null,
-    to:   null
-  }
-}
-const store = createStore(reducer, {})
+const store = createStore(reducer, {}, enhancer)
 
 // dev only
 window.store = store

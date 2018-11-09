@@ -7,19 +7,18 @@ import {changeSelection} from '../../actions'
 
 class Filters extends Component {
   static propTypes = {
-    articles: PropTypes.array.isRequired,
+    articles: PropTypes.object.isRequired,
     selected: PropTypes.array.isRequired
   }
 
   handleChange = (selected) => {
-    console.log(this.props.selected, selected.map(option => option.value))
     this.props.changeSelection(
       selected.map(option => option.value)
     )
   }
   render() {
     const { articles, selected } = this.props
-    const options = articles.map((article) => ({
+    const options = Object.values(articles).map((article) => ({
       label: article.title,
       value: article.id
     }))

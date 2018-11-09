@@ -10,7 +10,6 @@ function CommentList({comments = [], isOpen, toggleOpen}) {
     <div>
       <button onClick = {toggleOpen}>{text}</button>
       {displayComments(comments, isOpen)}
-      <CommentForm />
     </div>
   )
 }
@@ -26,11 +25,14 @@ function displayComments(comments, isOpen) {
   if (!comments.length) return <p>No comments yet</p>
 
   return (
-    <ul>
-      {comments.map((id) => {
-        return <li key = {id}><Comment id = {id}/></li>
-      })}
-    </ul>
+    <div className = 'article-comments'>
+      <ul>
+        {comments.map((id) => {
+          return <li key = {id}><Comment id = {id}/></li>
+        })}
+      </ul>
+      <CommentForm />
+    </div>
   )
 }
 

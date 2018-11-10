@@ -1,5 +1,5 @@
-import {DELETE_ARTICLE, ADD_COMMENT, LOAD_ARTICLES, START, SUCCESS,
-  FAIL} from '../constants'
+import {DELETE_ARTICLE, ADD_COMMENT, LOAD_ARTICLES, LOAD_ARTICLE, START,
+  SUCCESS, FAIL} from '../constants'
 import {OrderedMap, Record} from 'immutable'
 import {arrToMap} from '../helpers'
 
@@ -7,6 +7,7 @@ const ArticleRecord = new Record({
   id: undefined,
   title: '',
   text: undefined,
+  loading: false,
   comments: []
 })
 
@@ -37,6 +38,11 @@ export default (articles = defaultState, action) => {
         .set('entities', arrToMap(response, ArticleRecord))
         .set('loading', false)
         .set('loaded', true)
+    case LOAD_ARTICLE + START:
+      return articles.setIn(['entities', payload.id, 'loading'], true)
+    case LOAD_ARTICLE + SUCCESS:
+      return articles.setIn(['entities', payload.id],
+        new ArticleRecord(payload.response))
     default:
       return articles
   }

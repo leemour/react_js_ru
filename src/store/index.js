@@ -4,8 +4,9 @@ import articles from '../fixtures'
 import logger from '../middlewares/logger'
 import idGenerator from '../middlewares/idGenerator'
 import api from '../middlewares/api'
+import thunk from 'redux-thunk'
 
-const enhancer = applyMiddleware(api, idGenerator, logger)
+const enhancer = applyMiddleware(thunk, api, idGenerator, logger)
 
 const store = createStore(reducer, {}, enhancer)
 

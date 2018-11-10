@@ -5,7 +5,8 @@ import toggleOpen from '../../decorators/toggleOpen'
 import CommentList from '../CommentList'
 import {CSSTransitionGroup} from 'react-transition-group'
 import './style.css'
-import {deleteArticle} from '../../actions'
+import {deleteArticle, loadArticle} from '../../actions'
+import Loader from '../Loader'
 
 class Article extends PureComponent {
   static propTypes = {
@@ -13,6 +14,8 @@ class Article extends PureComponent {
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       text: PropTypes.string,
+      loading: PropTypes.bool,
+      comments: PropTypes.array
     }).isRequired,
     isOpen: PropTypes.bool,
     toggleOpen: PropTypes.func.isRequired
@@ -20,6 +23,10 @@ class Article extends PureComponent {
 
   state = {
     updateIndex: 0
+  }
+
+  componentWillReceiveProps({isOpen, loadArticle, article}) {
+    if (isOpen && !article.text && !article.loading) loadArticle(article.id)
   }
 
   render() {
@@ -64,6 +71,7 @@ class Article extends PureComponent {
   getBody = () => {
     const {article, isOpen} = this.props
     if (!isOpen) return null
+    if (article.loading) return <Loader />
     return (
       <section>
         {article.text}
@@ -108,4 +116,4 @@ class Article extends PureComponent {
 
 // export default toggleOpen(Article)
 
-export default connect(null, { deleteArticle })(Article)
+export default connect(null, { deleteArticle, loadArticle })(Article)

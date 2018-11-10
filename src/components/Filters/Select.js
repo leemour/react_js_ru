@@ -37,5 +37,5 @@ class Filters extends Component {
 
 export default connect((state) => ({
   selected: state.filters.selected,
-  articles: state.articles
+  articles: state.articles.entities
 }), { changeSelection })(Filters)

@@ -5,6 +5,7 @@ import Article from './Article'
 import {connect} from 'react-redux'
 import {filteredArticlesSelector} from '../selectors'
 import {loadArticles} from '../actions'
+import Loader from './Loader'
 
 class ArticleList extends Component {
   static propTypes = {
@@ -16,11 +17,13 @@ class ArticleList extends Component {
   }
 
   componentDidMount() {
-    this.props.loadArticles()
+    const {loading, loaded, loadArticles} = this.props
+    if (!loaded && !loading) loadArticles()
   }
 
   render() {
-    const {articles, openItemId, toggleOpen} = this.props
+    const {loading, articles, openItemId, toggleOpen} = this.props
+    if (loading) return <Loader />
     const articleElements = articles.toArray().map(article => {
       return (
         <li key = {article.id}>
@@ -41,6 +44,10 @@ class ArticleList extends Component {
   }
 }
 
-export default connect(
-  (state) => ({ articles: filteredArticlesSelector(state) })
-, { loadArticles })(accordeonOpen(ArticleList))
+export default connect((state) => {
+  return {
+    articles: filteredArticlesSelector(state),
+    loading: state.articles.loading,
+    loaded: state.articles.loaded
+  }
+}, { loadArticles })(accordeonOpen(ArticleList))

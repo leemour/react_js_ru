@@ -1,7 +1,7 @@
 import {createSelector} from 'reselect'
 
 const filtersGetter   = state => state.filters
-const arcitclesGetter = state => state.articles
+const arcitclesGetter = state => state.articles.entities
 const commentsGetter  = state => state.comments
 const commentIdGetter = (state, props) => props.id
 
